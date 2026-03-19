@@ -13,9 +13,15 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v3
 
+      # On ajoute cette étape pour installer Python sur le runner
+      - name: Configurer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
       - name: Lancer un serveur web local
         shell: cmd
         run: |
           echo "Le site est prêt sur le runner"
-          # On utilise python pour lancer un petit serveur web sur le port 8000
+          REM On utilise python pour lancer un petit serveur web sur le port 8000
           start /B python -m http.server 8000
