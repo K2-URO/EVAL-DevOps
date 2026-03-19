@@ -9,11 +9,16 @@ jobs:
   html-linter:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout du code
-        uses: actions/checkout@v3
-
-      - name: Vérification du code HTML
-        uses: chkbug/setup-djlint@v1
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+      
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          
+      - name: Installer djlint
+        run: pip install djlint
         
       - name: Lancer le linter
-        run: djlint index.html --check
+        run: djlint index.html --lint
