@@ -1,0 +1,19 @@
+name: CI - Vérification HTML
+
+on:
+  push:
+    branches:
+      - VERIF
+
+jobs:
+  html-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Vérification du code HTML
+        uses: chkbug/setup-djlint@v1
+        
+      - name: Lancer le linter
+        run: djlint index.html --check
