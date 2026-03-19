@@ -30,4 +30,4 @@ jobs:
           
           echo "Test de la connexion avec curl :"
           # On fait le curl directement ici !
-          curl http://localhost:8000
+          curl.exe http://localhost:8000
