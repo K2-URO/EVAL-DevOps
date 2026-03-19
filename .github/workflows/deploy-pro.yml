@@ -23,5 +23,7 @@ jobs:
         shell: cmd
         run: |
           echo "Le site est prêt sur le runner"
+          REM On détache le processus pour que le runner ne le tue pas à la fin
+          set RUNNER_TRACKING_ID=""
           REM On utilise python pour lancer un petit serveur web sur le port 8000
           start /B python -m http.server 8000
