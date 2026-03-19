@@ -13,17 +13,21 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v3
 
-      # On ajoute cette étape pour installer Python sur le runner
       - name: Configurer Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Lancer un serveur web local
-        shell: cmd
+      - name: Lancer le serveur et tester avec curl
+        shell: powershell
         run: |
-          echo "Le site est prêt sur le runner"
-          REM On détache le processus pour que le runner ne le tue pas à la fin
-          set RUNNER_TRACKING_ID=""
-          REM On utilise python pour lancer un petit serveur web sur le port 8000
-          start /B python -m http.server 8000
+          echo "Démarrage du serveur web..."
+          # On lance le serveur en tâche de fond dans PowerShell
+          Start-Process -NoNewWindow -FilePath "python" -ArgumentList "-m http.server 8000"
+          
+          # On attend 3 petites secondes pour être sûr qu'il est bien démarré
+          Start-Sleep -Seconds 3
+          
+          echo "Test de la connexion avec curl :"
+          # On fait le curl directement ici !
+          curl http://localhost:8000
